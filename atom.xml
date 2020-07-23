@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://zhao.wtf</id>
+    <title>Zhao 的博客</title>
+    <updated>2020-07-23T05:27:11.101Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://zhao.wtf"/>
+    <link rel="self" href="https://zhao.wtf/atom.xml"/>
+    <logo>https://zhao.wtf/images/avatar.png</logo>
+    <icon>https://zhao.wtf/favicon.ico</icon>
+    <rights>All rights reserved 2020, Zhao 的博客</rights>
+    <entry>
+        <title type="html"><![CDATA[Luogu P2038 无线网络发射器选址 题解]]></title>
+        <id>https://zhao.wtf/post/luogu-p2038-wu-xian-wang-luo-fa-she-qi-xuan-zhi-ti-jie/</id>
+        <link href="https://zhao.wtf/post/luogu-p2038-wu-xian-wang-luo-fa-she-qi-xuan-zhi-ti-jie/">
+        </link>
+        <updated>2020-07-23T04:52:26.000Z</updated>
+        <summary type="html"><![CDATA[<h3 id="题目大意分析">题目大意分析</h3>
+<p>在一个 128*128 的矩阵中，每一个点都有一个值，让你选一点 (a,b)，在(x-d,y-d)到(x+d,y+d)中的之和值最大，并求出使之最大的方案数</p>
+]]></summary>
+        <content type="html"><![CDATA[<h3 id="题目大意分析">题目大意分析</h3>
+<p>在一个 128*128 的矩阵中，每一个点都有一个值，让你选一点 (a,b)，在(x-d,y-d)到(x+d,y+d)中的之和值最大，并求出使之最大的方案数</p>
+<!-- more -->
+<p><a href="https://www.luogu.com.cn/problem/P2038">题目链接</a></p>
+<h3 id="思路-1">思路 1</h3>
+<p>128*128 的范围直接暴力模拟发射器在每一个点的情况就能轻松解决，但是在计算在(x-d,y-d)到(x+d,y+d)中的之和值时要注意下     边界和范围</p>
+<p>好了，话不多说，上代码</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cmath&gt;
+#include &lt;cstring&gt;
+#include &lt;string&gt;
+#include &lt;algorithm&gt;
+
+using namespace std; 
+
+int d,n,s[130][130];  //定义一个数组s存储每个坐标的值
+long long sum,num,z,x1,x2,y2,ya;
+
+int main()
+{
+    scanf(&quot;%d%d&quot;,&amp;d,&amp;n);
+
+    for(int i=0;i&lt;n;i++)
+    {
+        int a,b,k;
+        scanf(&quot;%d%d%d&quot;,&amp;b,&amp;a,&amp;k); //a点和b点与二维数组的x,y相反要处理下 
+
+        s[a][b]=k; 
+    }
+
+    for(int i=0;i&lt;=128;i++) //开始枚举
+    {
+        for(int j=0;j&lt;=128;j++)
+        {
+            z=0; //先清空
+
+            if(i-d&lt;0) x1=0; //判断纵坐标起点
+            else x1=i-d;    
+
+            if(i+d&gt;128) x2=128; //判断纵坐标终点
+            else x2=i+d;    
+
+            if(j-d&lt;0) ya=0; //判断横坐标起点
+            else ya=j-d;    
+
+            if(j+d&gt;128) y2=128; //判断横坐标终点
+            else y2=j+d;
+
+            for(int a=x1;a&lt;=x2;a++)   //对公共场所数量累加
+                for(int b=ya;b&lt;=y2;b++)
+                    z+=s[a][b]; 
+
+            if(z&gt;sum) //如果大于前一个值则替换
+            {
+                sum=z;
+                num=1;
+            }
+            else if(sum==z) //如果相等则数量自加
+                    num++;
+        }
+    }
+
+    printf(&quot;%lld %lld&quot;,num,sum); //输出
+
+    return 0;
+}
+</code></pre>
+<h3 id="思路-2">思路 2</h3>
+<p>时隔一年，再次看到这道题又有了另一种思路。</p>
+<p>显然，我们希望一个发射器能够覆盖尽可能多的公共场所，也就是贪心思想。但是发射器只能覆盖以该点为中心，边长为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>2</mn><mi>d</mi></mrow><annotation encoding="application/x-tex">2d</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">2</span><span class="mord mathdefault">d</span></span></span></span> 的正方形。因此，<strong>一个路口的公共场所只能被在一定的范围内的发射器覆盖</strong>。当有多个路口能被覆盖的范围存在交集时，则选择值最大的那一个。</p>
+<p>在代码实现上，只需开一个数组，把每一个路口能被覆盖的范围的坐标的值依次加上路口的公共场数量，然后遍历数组找最大值。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+#include &lt;cstdio&gt;
+#include &lt;cstring&gt;
+#include &lt;string&gt;
+#include &lt;cmath&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+int a[131][131],d,n,ans,Max=-1;
+
+void f(int x,int y,int z)  //进行赋值操作
+{
+    int t=d;
+    for(int i=x;(i&gt;=x-t)&amp;&amp;(i&gt;=0);i--)
+        for(int j=y;(j&gt;=y-t)&amp;&amp;(j&gt;=0);j--)
+            a[i][j]+=z;
+
+    for(int i=x+1;(i&lt;=x+t)&amp;&amp;(i&lt;=128);i++)
+        for(int j=y;(j&gt;=y-t)&amp;&amp;(j&gt;=0);j--)
+            a[i][j]+=z;
+    
+    for(int i=x;(i&gt;=x-t)&amp;&amp;(i&gt;=0);i--)
+        for(int j=y+1;(j&lt;=y+t)&amp;&amp;(j&lt;=128);j++)
+            a[i][j]+=z;
+    
+    for(int i=x+1;(i&lt;=x+t)&amp;&amp;(i&lt;=128);i++)
+        for(int j=y+1;(j&lt;=y+t)&amp;&amp;(j&lt;=128);j++)
+            a[i][j]+=z;
+}
+
+int main()
+{
+    memset(a,0,sizeof(a));
+    scanf(&quot;%d%d&quot;,&amp;d,&amp;n);
+    for(int i=0;i&lt;n;i++)
+    {
+        int x,y,z;
+        scanf(&quot;%d%d%d&quot;,&amp;x,&amp;y,&amp;z);
+        f(y,x,z);  
+    }
+
+    for(int i=0;i&lt;=128;i++)    //找出最大值并同时找出出现次数
+        for(int j=0;j&lt;=128;j++)
+        {
+            if(a[i][j]&gt;Max)
+            {
+                Max=a[i][j];
+                ans=1;
+                continue;
+            }
+            if(a[i][j]==Max)
+                ans++;
+        }
+
+    /*for(int i=0;i&lt;=10;i++)     //注释部分可打出数组进行观察
+    {
+        for(int j=0;j&lt;=10;j++)
+            printf(&quot;%d &quot;,a[i][j]);
+        printf(&quot;\n&quot;);
+    }*/
+    printf(&quot;%d %d&quot;,ans,Max);
+        
+    return 0;
+}
+</code></pre>
+<p>方法二比方法一在时间复杂度上有所减小，对比一下在同一时间洛谷评测的用时，就不再过多分析</p>
+<figure data-type="image" tabindex="1"><img src="https://cdn.luogu.com.cn/upload/pic/71390.png" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+</feed>
