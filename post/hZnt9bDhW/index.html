@@ -12,9 +12,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://zhao.wtf/favicon.ico?v=1595820100282">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico?v=1595820354021">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
-<link rel="stylesheet" href="https://zhao.wtf/styles/main.css">
+<link rel="stylesheet" href="http://localhost:4000/styles/main.css">
 
 
 
@@ -38,10 +38,10 @@
       <div class="site-header-container">
   <div class="site-header">
     <div class="left">
-      <a href="https://zhao.wtf">
-        <img class="avatar" src="https://zhao.wtf/images/avatar.png?v=1595820100282" alt="" width="32px" height="32px">
+      <a href="http://localhost:4000">
+        <img class="avatar" src="http://localhost:4000/images/avatar.png?v=1595820354021" alt="" width="32px" height="32px">
       </a>
-      <a href="https://zhao.wtf">
+      <a href="http://localhost:4000">
         <h1 class="site-title">Zhao 的博客</h1>
       </a>
     </div>
@@ -118,14 +118,14 @@
 		i++;
 	}
 </code></pre>
-<p>但是这个做法有个显著的缺陷，无法使用于数据含 <code>0</code> 的输入，故不推荐这种做法。</p>
+<p>但是这个做法有个显著的缺陷，无法适用于数据含 <code>0</code> 的输入，故不推荐这种做法。</p>
 <h2 id="方法二从输入语句上判断">方法二：从输入语句上判断</h2>
 <p><code>cin</code> 和 <code>scanf</code> 在输入数据后都会有返回值，所以可以通过判断返回值来判断是否成功输入数据。</p>
-<p><code>cin</code> 在成功输入数据时会返回非零数，而读入失败则会返回 <code>0</code></p>
+<p><code>cin</code> 在成功输入数据时会返回非零数，而读入失败则会返回 <code>0</code>。</p>
 <pre><code class="language-cpp">while(cin &gt;&gt; a[n]) n++;
 </code></pre>
-<p>当 <code>scanf</code> 没有接收到指定格式的变量时，返回值为0，遇到错误或遇到end of file，返回值为EOF（-1）。故正常输入的返回值大于零，错误或结束的输入返回值小于零。</p>
-<pre><code class="language-cpp">while(scanf(&quot;%d&quot;, &amp;a[n]) &gt; 0) n++; //由于在 C++ 中非零数均返回 true，而 EOF 值为 -1，也会认为是 true，因此需特判是否大于零。
+<p>当 <code>scanf</code> 没有接收到指定格式的变量时，返回值为0，遇到错误或遇到 end of file 时，返回值为 EOF（-1）。故正常输入的返回值大于零，错误或结束的输入返回值为零或负一。</p>
+<pre><code class="language-cpp">while(scanf(&quot;%d&quot;, &amp;a[n]) &gt; 0) n++; //由于在 C++ 中非零数均返回 true，而 EOF 值为 -1，也会认为是 true，因此需特判是否大于零
 </code></pre>
 <p>这个做法对于含零或不含零的数据都适用，推荐此种做法。</p>
 
@@ -134,7 +134,7 @@
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://zhao.wtf/post/luogu-p2038-wu-xian-wang-luo-fa-she-qi-xuan-zhi-ti-jie/">
+            <a class="purple-link" href="http://localhost:4000/post/luogu-p2038-wu-xian-wang-luo-fa-she-qi-xuan-zhi-ti-jie/">
               <h3 class="post-title">
                 下一篇：Luogu P2038 无线网络发射器选址 题解
               </h3>
@@ -164,7 +164,7 @@
       
     
   </div>
-  2019 - 2020 , Zhao © | <a class="rss" href="https://zhao.wtf/atom.xml" target="_blank">RSS</a>
+  2019 - 2020 , Zhao © | <a class="rss" href="http://localhost:4000/atom.xml" target="_blank">RSS</a>
 </div>
 
 
