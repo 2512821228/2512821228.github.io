@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>http://localhost:4000</id>
+    <id>https://zhao.wtf</id>
     <title>Zhao 的博客</title>
-    <updated>2020-07-27T03:25:59.042Z</updated>
+    <updated>2020-08-06T02:38:45.553Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="http://localhost:4000"/>
-    <link rel="self" href="http://localhost:4000/atom.xml"/>
-    <logo>http://localhost:4000/images/avatar.png</logo>
-    <icon>http://localhost:4000/favicon.ico</icon>
+    <link rel="alternate" href="https://zhao.wtf"/>
+    <link rel="self" href="https://zhao.wtf/atom.xml"/>
+    <logo>https://zhao.wtf/images/avatar.png</logo>
+    <icon>https://zhao.wtf/favicon.ico</icon>
     <rights>All rights reserved 2020, Zhao 的博客</rights>
     <entry>
         <title type="html"><![CDATA[不确定输入数量的输入]]></title>
-        <id>http://localhost:4000/post/hZnt9bDhW/</id>
-        <link href="http://localhost:4000/post/hZnt9bDhW/">
+        <id>https://zhao.wtf/post/hZnt9bDhW/</id>
+        <link href="https://zhao.wtf/post/hZnt9bDhW/">
         </link>
         <updated>2020-07-27T02:39:02.000Z</updated>
         <summary type="html"><![CDATA[<p>在一小部分题目中，可能不会给出输入数据的个数，而是直接给出所有需要输入的数据。在什么时候结束读入就成了一个问题。</p>
@@ -54,8 +54,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[Luogu P2038 无线网络发射器选址 题解]]></title>
-        <id>http://localhost:4000/post/luogu-p2038-wu-xian-wang-luo-fa-she-qi-xuan-zhi-ti-jie/</id>
-        <link href="http://localhost:4000/post/luogu-p2038-wu-xian-wang-luo-fa-she-qi-xuan-zhi-ti-jie/">
+        <id>https://zhao.wtf/post/luogu-p2038-wu-xian-wang-luo-fa-she-qi-xuan-zhi-ti-jie/</id>
+        <link href="https://zhao.wtf/post/luogu-p2038-wu-xian-wang-luo-fa-she-qi-xuan-zhi-ti-jie/">
         </link>
         <updated>2020-07-23T04:52:26.000Z</updated>
         <summary type="html"><![CDATA[<h3 id="题目大意分析">题目大意分析</h3>
